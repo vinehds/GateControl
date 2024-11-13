@@ -1,9 +1,12 @@
 package com.viniciusdalaqua.GateControl.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +24,10 @@ public class Driver implements Serializable {
     private String cnh;
 
     private String phone;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "owner")
+    private List<Vehicle> vehicles = new ArrayList<>();
 
     public Driver() {}
 
@@ -61,6 +68,18 @@ public class Driver implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void addVehicle(Vehicle vehicle) {
+        this.vehicles.add(vehicle);
+    }
+
+    public void removeVehicle(Vehicle vehicle) {
+        this.vehicles.remove(vehicle);
     }
 
     @Override
