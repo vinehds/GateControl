@@ -46,8 +46,8 @@ public class DriverResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Driver> update(@PathVariable long id, @RequestBody Driver obj){
-        Driver driverUpdated = driverService.update(id, obj);
-        return ResponseEntity.ok().body(driverUpdated);
+        obj = driverService.update(id, obj);
+        return ResponseEntity.ok().body(obj);
     }
 
     @DeleteMapping(value = "/{id}")

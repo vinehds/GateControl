@@ -4,14 +4,16 @@ import com.viniciusdalaqua.GateControl.entities.Vehicle;
 import com.viniciusdalaqua.GateControl.services.VehicleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/vehicles")
 public class VehicleResource {
 
-    private VehicleService vehicleService;
+    private final VehicleService vehicleService;
 
     public VehicleResource(VehicleService vehicleService) {
         this.vehicleService = vehicleService;
@@ -32,13 +34,20 @@ public class VehicleResource {
     @PostMapping
     public ResponseEntity<Vehicle> insert( @RequestBody Vehicle vehicle){
         Vehicle vehicleInserted = vehicleService.insert(vehicle);
-        return ResponseEntity.ok().body(vehicleInserted);
+
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(vehicleInserted.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(vehicleInserted);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Vehicle> update(@PathVariable long id, @RequestBody Vehicle obj){
-        Vehicle vehicleUpdated = vehicleService.update(id, obj);
-        return ResponseEntity.ok().body(vehicleUpdated);
+        obj = vehicleService.update(id, obj);
+        return ResponseEntity.ok().body(obj);
     }
 
     @DeleteMapping(value = "/{id}")
