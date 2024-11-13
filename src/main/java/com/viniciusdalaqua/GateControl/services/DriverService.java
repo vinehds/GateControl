@@ -5,6 +5,7 @@ import com.viniciusdalaqua.GateControl.repositories.DriverRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DriverService {
@@ -17,5 +18,30 @@ public class DriverService {
 
     public List<Driver> findAll() {
         return driverRepository.findAll();
+    }
+
+    public Driver findById(Long id) {
+        Optional<Driver> driver = driverRepository.findById(id);
+        return driver.orElseThrow();
+    }
+
+    public Driver insert(Driver driver) {
+        return driverRepository.save(driver);
+    }
+
+    public Driver update(Long id, Driver obj) {
+        Driver entity = driverRepository.getReferenceById(id);
+        updateData(entity, obj);
+        return driverRepository.save(entity);
+    }
+
+    public void updateData(Driver entity, Driver obj) {
+        entity.setName(obj.getName());
+        entity.setCnh(obj.getCnh());
+        entity.setPhone(obj.getPhone());
+    }
+
+    public void delete(Long id){
+        driverRepository.deleteById(id);
     }
 }
