@@ -29,6 +29,10 @@ public class Driver implements Serializable {
     @OneToMany(mappedBy = "owner")
     private List<Vehicle> vehicles = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "driver")
+    private RecordLog recordLog;
+
     public Driver() {}
 
     public Driver(Long id, String name, String cnh, String phone) {

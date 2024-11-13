@@ -1,5 +1,6 @@
 package com.viniciusdalaqua.GateControl.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -25,6 +26,18 @@ public class Vehicle implements Serializable {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Driver owner;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "vehicle")
+    private RecordLog recordLog;
+
+    public RecordLog getRecordLog() {
+        return recordLog;
+    }
+
+    public void setRecordLog(RecordLog recordLog) {
+        this.recordLog = recordLog;
+    }
 
     public Vehicle() {}
 
