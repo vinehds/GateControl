@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Portaria</title>
+    <!-- Link para o arquivo JavaScript -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+<h1>Sistema de Portaria</h1>
+
+<section>
+    <h2>Concierges</h2>
+    <ul id="concierges-list">
+        <!-- A lista de concierges será carregada aqui -->
+    </ul>
+
+    <h3>Adicionar Concierge</h3>
+    <label for="concierge-name">Nome: </label>
+    <input type="text" id="concierge-name">
+    <br>
+    <label for="concierge-location">Local: </label>
+    <input type="text" id="concierge-location">
+    <br>
+    <button onclick="addConcierge()">Adicionar Concierge</button>
+</section>
+
+<section>
+    <h2>Excluir Concierge</h2>
+    <button onclick="deleteConcierge(1)">Excluir Concierge com ID 1</button>
+</section>
+</body>
+</html>

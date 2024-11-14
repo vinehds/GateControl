@@ -60,4 +60,5 @@ public class VehicleService {
         entity.setColor(obj.getColor());
         entity.setOwner(obj.getOwner());
     }
+
 }
