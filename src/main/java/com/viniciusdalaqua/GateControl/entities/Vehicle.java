@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,16 +29,8 @@ public class Vehicle implements Serializable {
     private Driver owner;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "vehicle")
-    private RecordLog recordLog;
-
-    public RecordLog getRecordLog() {
-        return recordLog;
-    }
-
-    public void setRecordLog(RecordLog recordLog) {
-        this.recordLog = recordLog;
-    }
+    @OneToMany(mappedBy = "vehicle")
+    private List<RecordLog> records = new java.util.ArrayList<>();
 
     public Vehicle() {}
 
@@ -87,6 +80,17 @@ public class Vehicle implements Serializable {
 
     public void setOwner(Driver owner) {
         this.owner = owner;
+    }
+    public List<RecordLog> getRecords() {
+        return records;
+    }
+
+    public void addRecord(RecordLog record) {
+        this.records.add(record);
+    }
+
+    public void removeRecord(RecordLog record) {
+        this.records.remove(record);
     }
 
     @Override

@@ -30,8 +30,8 @@ public class Driver implements Serializable {
     private List<Vehicle> vehicles = new ArrayList<>();
 
     @JsonIgnore
-    @OneToOne(mappedBy = "driver")
-    private RecordLog recordLog;
+    @OneToMany(mappedBy = "driver")
+    private List<RecordLog> records = new ArrayList<>();
 
     public Driver() {}
 
@@ -84,6 +84,17 @@ public class Driver implements Serializable {
 
     public void removeVehicle(Vehicle vehicle) {
         this.vehicles.remove(vehicle);
+    }
+    public List<RecordLog> getRecords() {
+        return records;
+    }
+
+    public void addRecord(RecordLog record) {
+        this.records.add(record);
+    }
+
+    public void removeRecord(RecordLog record) {
+        this.records.remove(record);
     }
 
     @Override

@@ -1,9 +1,11 @@
 package com.viniciusdalaqua.GateControl.Config;
 
+import com.viniciusdalaqua.GateControl.entities.Concierge;
 import com.viniciusdalaqua.GateControl.entities.Driver;
 import com.viniciusdalaqua.GateControl.entities.RecordLog;
 import com.viniciusdalaqua.GateControl.entities.Vehicle;
 import com.viniciusdalaqua.GateControl.entities.enuns.RecordType;
+import com.viniciusdalaqua.GateControl.repositories.ConciergeRepository;
 import com.viniciusdalaqua.GateControl.repositories.DriverRepository;
 import com.viniciusdalaqua.GateControl.repositories.RecordLogRepository;
 import com.viniciusdalaqua.GateControl.repositories.VehicleRepository;
@@ -21,10 +23,13 @@ public class TestConfig implements CommandLineRunner {
 
     private final RecordLogRepository recordRepository;
 
-    public TestConfig(DriverRepository driverRepository, VehicleRepository vehicleRepository, RecordLogRepository recordRepository) {
+    private final ConciergeRepository conciergeRepository;
+
+    public TestConfig(DriverRepository driverRepository, VehicleRepository vehicleRepository, RecordLogRepository recordRepository, ConciergeRepository conciergeRepository) {
         this.driverRepository = driverRepository;
         this.vehicleRepository = vehicleRepository;
         this.recordRepository = recordRepository;
+        this.conciergeRepository = conciergeRepository;
     }
 
     @Override
@@ -39,8 +44,14 @@ public class TestConfig implements CommandLineRunner {
         driverRepository.save(driver);
         vehicleRepository.save(v1);
 
-        RecordLog rl1 = new RecordLog(null, RecordType.OUT, LocalDateTime.now(), v1, v1.getOwner(), "...");
+        Concierge concierge = new Concierge(null, "Portaria das Flores", "Lençóis Palista - SP");
+        RecordLog rl1 = new RecordLog(null, RecordType.OUT, LocalDateTime.now(), v1, v1.getOwner(), "...", concierge);
+        concierge.addRecord(rl1);
+
+        conciergeRepository.save(concierge);
         recordRepository.save(rl1);
+
+
 
     }
 }

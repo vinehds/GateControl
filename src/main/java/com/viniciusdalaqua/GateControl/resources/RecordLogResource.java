@@ -44,13 +44,13 @@ public class RecordLogResource {
         return ResponseEntity.created(uri).body(record);
     }
 
-    @PutMapping
+    @PutMapping(value = "/{id}")
     public ResponseEntity<RecordLog> update(@PathVariable Long id, @RequestBody RecordLog obj){
         obj = service.update(id,obj);
         return ResponseEntity.ok().body(obj);
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
