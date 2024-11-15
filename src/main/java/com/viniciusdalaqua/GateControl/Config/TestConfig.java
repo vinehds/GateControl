@@ -33,6 +33,7 @@ public class TestConfig implements CommandLineRunner {
         this.conciergeRepository = conciergeRepository;
     }
 
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -50,25 +51,37 @@ public class TestConfig implements CommandLineRunner {
         driverRepository.saveAll(Arrays.asList(driver, driver2, driver3) );
         vehicleRepository.saveAll(Arrays.asList(v1, v2, v3, v4));
 
-        Concierge concierge = new Concierge(null, "Portaria das Flores", "Lençóis Palista - SP");
+        Concierge concierge1 = new Concierge(null, "Portaria das Flores", "Lençóis Palista - SP");
+        Concierge concierge2 = new Concierge(null, "Portaria das arvortes", "Lençóis Palista - SP");
+        Concierge concierge3 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge4 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge6 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge5 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge7 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge8 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge9 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge0 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge01 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge02 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge03 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
+        Concierge concierge04 = new Concierge(null, "Portaria das cidades", "Lençóis Palista - SP");
 
-        RecordLog r1 = new RecordLog(null, RecordType.OUT, LocalDateTime.now(), v1, v1.getOwner(), "...", concierge);
-        RecordLog r2 = new RecordLog(null, RecordType.IN, LocalDateTime.now(), v1, v1.getOwner(), "...", concierge);
-        RecordLog r3 = new RecordLog(null, RecordType.IN, LocalDateTime.now(), v2, v2.getOwner(), "...", concierge);
-        RecordLog r4 = new RecordLog(null, RecordType.OUT, LocalDateTime.now(), v3, v3.getOwner(), "...", concierge);
-        RecordLog r5 = new RecordLog(null, RecordType.OUT, LocalDateTime.now(), v4, v4.getOwner(), "...", concierge);
-        RecordLog r6 = new RecordLog(null, RecordType.IN, LocalDateTime.now(), v3, v3.getOwner(), "...", concierge);
-        concierge.addRecord(r1);
-        concierge.addRecord(r2);
-        concierge.addRecord(r3);
-        concierge.addRecord(r4);
-        concierge.addRecord(r5);
-        concierge.addRecord(r6);
 
-        conciergeRepository.save(concierge);
+        RecordLog r1 = new RecordLog(null, RecordType.OUT, LocalDateTime.now(), v1, v1.getOwner(), "...", concierge1);
+        RecordLog r2 = new RecordLog(null, RecordType.IN, LocalDateTime.now(), v1, v1.getOwner(), "...", concierge1);
+        RecordLog r3 = new RecordLog(null, RecordType.IN, LocalDateTime.now(), v2, v2.getOwner(), "...", concierge1);
+        RecordLog r4 = new RecordLog(null, RecordType.OUT, LocalDateTime.now(), v3, v3.getOwner(), "...", concierge1);
+        RecordLog r5 = new RecordLog(null, RecordType.OUT, LocalDateTime.now(), v4, v4.getOwner(), "...", concierge1);
+        RecordLog r6 = new RecordLog(null, RecordType.IN, LocalDateTime.now(), v3, v3.getOwner(), "...", concierge1);
+        concierge1.addRecord(r1);
+        concierge1.addRecord(r2);
+        concierge1.addRecord(r3);
+        concierge1.addRecord(r4);
+        concierge1.addRecord(r5);
+        concierge1.addRecord(r6);
+
+        conciergeRepository.saveAll(Arrays.asList(concierge1, concierge2, concierge3, concierge4));
         recordRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5, r6));
-
-
 
     }
 }

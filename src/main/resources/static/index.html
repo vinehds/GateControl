@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Portaria</title>
+    <title>GateControl</title>
     <!-- Link para o arquivo JavaScript -->
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<h1>Sistema de Portaria</h1>
+    <div class="content">
+        <nav class="navbar">
+            <ul class="nav-list">
 
-<section>
-    <h2>Concierges</h2>
-    <ul id="concierges-list">
-        <!-- A lista de concierges será carregada aqui -->
-    </ul>
+            </ul>
+        </nav>
+        <div class="container">
+            <section>
+                <h1>PORTARIAS REGISTRADAS</h1>
+                <ul id="concierges-list">
+                    <!-- A lista de concierges será carregada aqui -->
+                </ul>
+                <div class="buttons-container">
+                    <button class="btn" id="btnAdd">Adicionar</button>
+                    <button class="btn" id="btnUpt">Editar</button>
+                </div>
+            </section>
+        </div>
+    </div>
 
-    <h3>Adicionar Concierge</h3>
-    <label for="concierge-name">Nome: </label>
-    <input type="text" id="concierge-name">
-    <br>
-    <label for="concierge-location">Local: </label>
-    <input type="text" id="concierge-location">
-    <br>
-    <button onclick="addConcierge()">Adicionar Concierge</button>
-</section>
-
-<section>
-    <h2>Excluir Concierge</h2>
-    <button onclick="deleteConcierge(1)">Excluir Concierge com ID 1</button>
-</section>
 </body>
 </html>
