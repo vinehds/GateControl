@@ -4,28 +4,25 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     background-image: url("bkimage.jpg");
-    background-size: cover; /* Faz a imagem cobrir toda a tela */
-    background-position: center; /* Centraliza a imagem */
-    background-attachment: fixed; /* Faz com que a imagem de fundo fique fixa ao rolar a página */
-
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 h1 {
-    font-family: 'Poppins', sans-serif; /* Fonte moderna e elegante */
-    font-size: 3rem; /* Tamanho grande */
-    font-weight: bold; /* Negrito */
-    text-transform: uppercase; /* Deixa o texto em maiúsculas */
-    color: #fff; /* Cor do texto branca */
-    text-align: center; /* Alinha o texto no centro */
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
     background-color: brown;
-    padding: 20px; /* Preenchimento interno */
-    border-radius: 10px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra suave */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
-
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Estilo da barra de navegação */
 .navbar {
     background-color: rgb(44, 44, 51);
     width: 100%;
@@ -36,30 +33,26 @@ h1 {
     padding: 0;
 }
 
-/* Estilo da lista de navegação para alinhar na horizontal */
 .nav-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    display: flex; /* Define a exibição em linha horizontal */
+    display: flex;
 }
 
-/* Estilo dos itens da lista */
 .nav-list li {
-    margin-right: 20px; /* Espaço entre os itens */
+    margin-right: 20px;
 }
 
-/* Estilo dos links */
 .nav-list li a {
     color: white;
     text-decoration: none;
     padding: 10px 15px;
-    transition: background-color 0.3s; /* Animação de hover */
+    transition: background-color 0.3s;
 }
 
-/* Estilo ao passar o mouse */
 .nav-list li a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Fundo ao passar o mouse */
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
 }
 
@@ -71,46 +64,47 @@ h1 {
     align-items: center;
 }
 
-
-.container{
+.container {
     display: flex;
     justify-content: center;
     width: 90%;
     height: 100%;
 }
 
-.section{
+.section {
     margin: 10%;
 }
 
 #concierges-list {
-    list-style-type: none; /* Remove os marcadores de lista */
-    padding: 0; /* Remove o padding padrão */
+    list-style-type: none;
+    padding: 0;
 }
 
 #concierges-list li {
-    margin: 10px 0; /* Espaçamento entre os itens, verticalmente */
-    padding: 20px; /* Preenchimento interno para o item */
-    background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo com opacidade */
-    border: 2px solid #ddd; /* Borda leve */
-    border-radius: 10px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
+    margin: 10px 0;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #concierges-list li:hover {
-    transform: translateY(-5px); /* Leve elevação no hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta a sombra no hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 .buttons-container {
-    display: flex; /* Flexbox para os botões ficarem lado a lado */
-    gap: 10px; /* Espaço entre os botões */
-    margin-top: 20px; /* Espaçamento entre a lista e os botões */
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
 }
+
 .btn {
-    flex: 1; /* Faz os botões ocuparem toda a largura */
+    flex: 1;
     padding: 15px;
-    background-color: #007BFF;
+    background-color: brown;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -119,15 +113,114 @@ h1 {
     transition: background-color 0.3s ease;
     margin-bottom: 50px;
 }
+
 .btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-5px); /* Leve elevação no hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta a sombra no hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-#btnUpt{
+
+#btnUpt {
     background-color: brown;
 }
 
-#btnAdd{
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Semitransparente */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    height:450px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    margin: 30px;
+}
+
+form .btn {
+    padding: 12px 20px;
     background-color: brown;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+form .btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+input, select {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 90%;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: brown;
+    outline: none;
+}
+
+label {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 125px;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.delete-button:active {
+    background-color: #a93226;
 }

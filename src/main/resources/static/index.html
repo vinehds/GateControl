@@ -1,33 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GateControl</title>
-    <!-- Link para o arquivo JavaScript -->
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css"/>
+    <title>Controle de Portaria</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="content">
-        <nav class="navbar">
-            <ul class="nav-list">
+<div class="content">
 
+    <div class="container">
+        <section>
+            <h1>PORTARIAS REGISTRADAS</h1>
+            <ul id="concierges-list">
+                <!-- A lista de concierges será carregada aqui -->
             </ul>
-        </nav>
-        <div class="container">
-            <section>
-                <h1>PORTARIAS REGISTRADAS</h1>
-                <ul id="concierges-list">
-                    <!-- A lista de concierges será carregada aqui -->
-                </ul>
-                <div class="buttons-container">
-                    <button class="btn" id="btnAdd">Adicionar</button>
-                    <button class="btn" id="btnUpt">Editar</button>
-                </div>
-            </section>
+            <div class="buttons-container">
+                <button class="btn" id="btnAdd">Adicionar</button>
+                <button class="btn" id="btnUpt">Editar</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>ADICIONAR PORTARIA</h2>
+            <form id="addForm">
+                <fieldset>
+                    <legend>Informações da Portaria</legend>
+
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="location">Local:</label>
+                    <input type="text" id="location" name="location" required>
+
+                </fieldset>
+                <button type="submit" class="btn">Salvar</button>
+            </form>
         </div>
     </div>
 
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>EDITAR PORTARIA</h2>
+            <form id="editForm">
+                <fieldset>
+                    <legend>Informações da Portaria</legend>
+
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" name="id" required>
+
+                    <label for="editName">Nome:</label>
+                    <input type="text" id="editName" name="name" required>
+
+                    <label for="editLocation">Local:</label>
+                    <input type="text" id="editLocation" name="location" required>
+
+                </fieldset>
+                <button type="submit" class="btn" id="saveEditBtn">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
