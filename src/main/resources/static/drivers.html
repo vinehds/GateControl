@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema de Portaria</title>
   <link rel="stylesheet" href="entity-styles.css">
-  <!-- Link para Font Awesome (Adicione isso no seu <head>) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -17,39 +16,19 @@
   <div class="sidebar">
     <div class="divider-top"></div>
     <ul>
-      <li>
-        <a href="index.html">
-          <i class="fas fa-home"></i> Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="drivers.html">
-          <i class="fas fa-users"></i> Motoristas
-        </a>
-      </li>
-      <li>
-        <a href="vehicles.html">
-          <i class="fas fa-car"></i> Veículos
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="fas fa-cogs"></i> Configurações
-        </a>
-      </li>
+      <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+      <li><a href="drivers.html"><i class="fas fa-users"></i> Motoristas</a></li>
+      <li><a href="vehicles.html"><i class="fas fa-car"></i> Veículos</a></li>
     </ul>
   </div>
 
   <main class="content">
     <header>
-      <div class="head">
-        <h1>GERENCIAMENTO DE MOTORISTAS</h1>
-      </div>
+      <div class="head"><h1>GERENCIAMENTO DE MOTORISTAS</h1></div>
     </header>
 
     <button id="btn-create">Novo Motorista</button>
 
-    <!-- Modal de Adição de Motorista -->
     <div id="modal" class="modal">
       <div class="modal-content">
         <span class="close" id="close-modal">&times;</span>
@@ -66,7 +45,6 @@
       </div>
     </div>
 
-    <!-- Confirmação de sucesso -->
     <div id="success-message" class="success-message">
       <p>Motorista adicionado com sucesso!</p>
     </div>
@@ -81,15 +59,13 @@
           <th>Ações</th>
         </tr>
         </thead>
-        <tbody id="driver-table">
-        <!-- Dados dos motoristas serão injetados via JS -->
-        </tbody>
+        <tbody id="driver-table"></tbody>
       </table>
     </section>
   </main>
 
   <footer class="footer">
-    <p>&copy; 2024 Sistema de Portaria. Todos os direitos reservados.</p>
+    <p>&copy; 2024 Sistema de Portaria | Criado por Vinicius Dalaqua.</p>
   </footer>
 </div>
 

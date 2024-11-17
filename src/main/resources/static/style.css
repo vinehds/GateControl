@@ -8,20 +8,27 @@
 /* Corpo e fonte */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     color: #2c3e50;
     line-height: 1.6;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url("assets/bkimage.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
-p{
+
+p {
     padding: 30px;
 }
+
+/* Cabeçalho */
 .head h1 {
     font-size: 28px;
     margin-bottom: 20px;
-    border-bottom: 2px solid #34495e; /* Linha de divisão no cabeçalho */
+    color: #294866;
+    border-bottom: 2px solid #20283a;
     padding-bottom: 10px;
 }
 
@@ -31,7 +38,7 @@ p{
     color: #fff;
     padding: 15px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .top-nav h1 {
@@ -41,7 +48,7 @@ p{
 /* Container principal (sidebar e conteúdo) */
 .main-container {
     display: flex;
-    width: 100%;
+    width: 99%;
 }
 
 /* Sidebar */
@@ -79,7 +86,6 @@ p{
 .content {
     flex: 1;
     padding: 20px;
-    overflow-y: auto;
 }
 
 /* Cabeçalho do conteúdo */
@@ -243,7 +249,7 @@ button:focus {
 
 /* Estilo para o botão Salvar inicialmente invisível */
 .btn-save {
-    display: none; /* Garantir que esteja invisível inicialmente */
+    display: none;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -258,29 +264,29 @@ button:focus {
 
 /* Estilo para os campos, tanto habilitados quanto desabilitados */
 .editable {
-    background-color: #fff;  /* Fundo branco */
-    color: #333;             /* Texto escuro */
-    border: 1px solid #ccc; /* Borda padrão */
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
     padding: 8px 12px;
     width: 100%;
 }
 
 /* Remover estilização padrão para campos desabilitados */
 .editable:disabled {
-    background-color: #fff; /* Fundo branco (sem esmaecer) */
-    color: #333;            /* Cor do texto normal (sem clarear) */
-    border: 1px solid #ccc; /* Manter a borda normal */
-    cursor: not-allowed;    /* Cursor de não permitido */
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
 }
 
 /* Estilo para o cursor nos campos desabilitados */
 .editable:disabled {
-    all: unset; /* Remove todos os estilos aplicados */
+    all: unset;
 }
 
 /* Estilo do botão de adicionar */
 .btn-add {
-    width: 100%; /* O botão ocupará toda a largura do contêiner pai */
+    width: 100%;
     background-color: #28a745;
     color: white;
     border: none;
@@ -297,13 +303,13 @@ button:focus {
 }
 
 .popup {
-    display: none; /* Inicialmente escondido */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     align-items: center;
     justify-content: center;
@@ -340,12 +346,26 @@ button:focus {
 /* Rodapé */
 .footer {
     max-height: 100px;
-    background-color: #333;
+    background-color: #23323f;
     color: #fff;
     text-align: center;
     padding: 0;
     position: relative;
 }
-.footer p{
+
+.footer p {
     padding: 20px;
+}
+
+.filter-container {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+#filterInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 300px;
 }

@@ -1,26 +1,23 @@
 const API_URL = `http://localhost:8080/vehicles`;
 
-// Carregar os veículos na tabela
 async function loadVehicles() {
     const response = await fetch(API_URL);
     const vehicles = await response.json();
 
-    // Requisição para obter os motoristas
     const driversResp = await fetch(`http://localhost:8080/drivers`);
     const drivers = await driversResp.json();
 
     const list = document.getElementById('vehicle-table');
-    list.innerHTML = ''; // Limpar a lista
+    list.innerHTML = '';
 
     if (vehicles.length > 0) {
         vehicles.forEach(vehicle => {
-            // Gerar as opções do select de motoristas
             const driverOptions = drivers.map(driver => {
                 return `<option value="${driver.id}" ${driver.id === vehicle.owner.id ? 'selected' : ''}>${driver.name}</option>`;
             }).join('');
 
             list.innerHTML += `
-            <tr>
+            <tr id="vehicle-row-${vehicle.id}">
                 <td>
                     <select class="editable" id="owner-${vehicle.id}" disabled>
                         ${driverOptions}
@@ -42,29 +39,23 @@ async function loadVehicles() {
     }
 }
 
-// Chamar a função assim que a página for carregada
 window.onload = loadVehicles;
 
-// Função para editar veículo
 async function editVehicle(id) {
-    // Habilitar os campos para edição
     document.getElementById(`owner-${id}`).disabled = false;
     document.getElementById(`plate-${id}`).disabled = false;
     document.getElementById(`model-${id}`).disabled = false;
     document.getElementById(`color-${id}`).disabled = false;
 
-    // Exibir o botão "Salvar"
     const saveButton = document.querySelector(`#vehicle-table tr td button[onclick="saveVehicle(${id})"]`);
     saveButton.style.display = 'inline-block';
 
-    // Esconder o botão "Editar"
     const editButton = document.querySelector(`#vehicle-table tr td button[onclick="editVehicle(${id})"]`);
     editButton.style.display = 'none';
 }
 
-// Função para salvar alterações do veículo
 async function saveVehicle(id) {
-    const ownerId = document.getElementById(`owner-${id}`).value; // Pegando apenas o id do motorista
+    const ownerId = document.getElementById(`owner-${id}`).value;
     const plate = document.getElementById(`plate-${id}`).value;
     const model = document.getElementById(`model-${id}`).value;
     const color = document.getElementById(`color-${id}`).value;
@@ -76,7 +67,6 @@ async function saveVehicle(id) {
         color: color
     };
 
-    // Enviar os dados para o backend para salvar as mudanças
     await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: {
@@ -85,11 +75,27 @@ async function saveVehicle(id) {
         body: JSON.stringify(vehicleData)
     });
 
-    // Recarregar os veículos
-    loadVehicles();
+    updateVehicleRow(id, vehicleData);
+
+    document.getElementById(`owner-${id}`).disabled = true;
+    document.getElementById(`plate-${id}`).disabled = true;
+    document.getElementById(`model-${id}`).disabled = true;
+    document.getElementById(`color-${id}`).disabled = true;
+
+    const saveButton = document.querySelector(`#vehicle-table tr td button[onclick="saveVehicle(${id})"]`);
+    saveButton.style.display = 'none';
+    const editButton = document.querySelector(`#vehicle-table tr td button[onclick="editVehicle(${id})"]`);
+    editButton.style.display = 'inline-block';
 }
 
-// Função para deletar veículo
+function updateVehicleRow(id, vehicleData) {
+    const row = document.querySelector(`#vehicle-row-${id}`);
+    row.querySelector(`#plate-${id}`).value = vehicleData.plate;
+    row.querySelector(`#model-${id}`).value = vehicleData.model;
+    row.querySelector(`#color-${id}`).value = vehicleData.color;
+    row.querySelector(`#owner-${id}`).value = vehicleData.owner.name;
+}
+
 async function deleteVehicle(id) {
     try {
         const response = await fetch(`${API_URL}/${id}`, {
@@ -98,7 +104,7 @@ async function deleteVehicle(id) {
 
         if (response.ok) {
             alert('Veículo deletado com sucesso!');
-            loadVehicles(); // Recarregar a lista de veículos após exclusão
+            loadVehicles();
         } else {
             alert('Erro ao deletar o Veículo!');
         }
@@ -108,24 +114,21 @@ async function deleteVehicle(id) {
     }
 }
 
-// Função para abrir o modal de adição de veículo
 function openModal() {
-    document.getElementById('modal').style.display = 'block'; // Exibir o modal
-    loadDrivers(); // Carregar os motoristas para o select no modal
+    document.getElementById('modal').style.display = 'block';
+    loadDrivers();
 }
 
-// Função para fechar o modal
 function closeModal() {
-    document.getElementById('modal').style.display = 'none'; // Esconder o modal
+    document.getElementById('modal').style.display = 'none';
 }
 
-// Função para carregar motoristas no modal
 async function loadDrivers() {
     const response = await fetch(`http://localhost:8080/drivers`);
     const drivers = await response.json();
 
     const ownerSelect = document.getElementById('owner');
-    ownerSelect.innerHTML = ''; // Limpar as opções anteriores
+    ownerSelect.innerHTML = '';
 
     drivers.forEach(driver => {
         const option = document.createElement('option');
@@ -135,12 +138,13 @@ async function loadDrivers() {
     });
 }
 
-// Função para adicionar um novo veículo
-async function addVehicle() {
+document.getElementById('vehicle-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
     const plate = document.getElementById('plate').value;
     const model = document.getElementById('model').value;
     const color = document.getElementById('color').value;
-    const ownerId = document.getElementById('owner').value; // Pegando o id do motorista selecionado
+    const ownerId = document.getElementById('owner').value;
 
     const vehicleData = {
         owner: { id: ownerId },
@@ -149,22 +153,30 @@ async function addVehicle() {
         color: color
     };
 
-    // Enviar os dados para o backend para adicionar o novo veículo
-    await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(vehicleData)
-    });
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(vehicleData)
+        });
 
-    // Fechar o modal após adicionar
-    closeModal()
+        if (response.status === 201) {
+            document.getElementById('success-message').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('success-message').style.display = 'none';
+            }, 3000);
 
-    // Recarregar a lista de veículos
-    loadVehicles();
-}
+            loadDrivers();
+            closeModal();
+        } else {
+            throw new Error('Falha ao adicionar veículo.');
+        }
+    } catch (error) {
+        alert('Erro ao adicionar veículo: ' + error.message);
+    }
+});
 
-// Associar evento ao botão de abrir modal
 document.getElementById('btn-create').addEventListener('click', openModal);
 document.getElementById('close-modal').addEventListener('click', closeModal);

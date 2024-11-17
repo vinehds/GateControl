@@ -1,7 +1,6 @@
-const API_URL = 'http://localhost:8080/records'; // URL base para registros
-const VEHICLES_BY_DRIVER_URL = 'http://localhost:8080/vehicles/findbydriver'; // URL para buscar veículos por motorista
+const API_URL = 'http://localhost:8080/records';
+const VEHICLES_BY_DRIVER_URL = 'http://localhost:8080/vehicles/findbydriver';
 
-// Função para exibir todos os registros de veículos e motoristas
 async function loadRecords() {
     try {
         const response = await fetch(`${API_URL}`);
@@ -10,16 +9,14 @@ async function loadRecords() {
         const drivers = await driversResponse.json();
 
         const list = document.getElementById('records-list');
-        list.innerHTML = ''; // Limpar a lista
+        list.innerHTML = '';
 
         if (records.length > 0) {
             records.forEach(record => {
-                // Criar opções do select de motoristas
                 const driverOptions = drivers
                     .map(driver => `<option value="${driver.id}" ${driver.name === record.driver.name ? 'selected' : ''}>${driver.name}</option>`)
                     .join('');
 
-                // Criar a linha da tabela
                 list.innerHTML += `
             <tr id="row-${record.id}">
                 <td>
@@ -58,30 +55,25 @@ async function loadRecords() {
     }
 }
 
-// Função para formatar a data no formato do input datetime-local
 function formatDateForInput(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mês começa do 0
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
-// Função para atualizar as opções de placas de veículos com base no motorista selecionado
 async function updateVehicleOptions(recordId) {
     const driverId = document.getElementById(`driver-${recordId}`).value;
     const plateSelect = document.getElementById(`plate-${recordId}`);
-
-    // Limpar placas anteriores
     plateSelect.innerHTML = '<option value="">Selecione a Placa</option>';
 
     if (driverId) {
         try {
             const response = await fetch(`${VEHICLES_BY_DRIVER_URL}/${driverId}`);
             const vehicles = await response.json();
-
             plateSelect.innerHTML += vehicles
                 .map(vehicle => `<option value="${vehicle.plate}">${vehicle.plate}</option>`)
                 .join('');
@@ -91,19 +83,15 @@ async function updateVehicleOptions(recordId) {
     }
 }
 
-// Função para habilitar a edição dos campos
 function enableEdit(recordId) {
     document.querySelectorAll(`#row-${recordId} .editable`).forEach(input => {
         input.disabled = false;
     });
     document.getElementById(`edit-${recordId}`).style.display = 'none';
     document.getElementById(`save-${recordId}`).style.display = 'inline-block';
-
-    // Atualizar veículos disponíveis com base no motorista selecionado
     updateVehicleOptions(recordId);
 }
 
-// Função para salvar o registro editado
 async function saveRecord(recordId) {
     const updatedRecord = {
         recordType: document.getElementById(`recordType-${recordId}`).value,
@@ -136,33 +124,28 @@ async function saveRecord(recordId) {
     }
 }
 
-// Função para excluir um registro
 async function deleteRecord(id) {
-    const response = await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE',
-    });
+    const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
 
     if (response.ok) {
-        loadRecords(); // Recarregar a lista de registros
+        loadRecords();
     }
 }
 
 function openAddRecordPopup() {
     document.getElementById('popup').style.display = 'flex';
-    loadDrivers();  // Carregar motoristas ao abrir o popup
+    loadDrivers();
 }
 
-// Função para fechar o popup de adicionar novo registro
 function closeAddRecordPopup() {
     document.getElementById('popup').style.display = 'none';
 }
 
 async function loadDrivers() {
-    const response = await fetch('/drivers'); // URL para carregar os motoristas
+    const response = await fetch('/drivers');
     const drivers = await response.json();
     const driverSelect = document.getElementById('driverId');
-
-    driverSelect.innerHTML = '<option value="">Selecione o Motorista</option>'; // Limpar as opções existentes
+    driverSelect.innerHTML = '<option value="">Selecione o Motorista</option>';
 
     drivers.forEach(driver => {
         const option = document.createElement('option');
@@ -175,8 +158,6 @@ async function loadDrivers() {
 async function loadDriverVehicles() {
     const driverId = document.getElementById('driverId').value;
     const vehicleSelect = document.getElementById('vehiclePlate');
-
-    // Limpar placas anteriores
     vehicleSelect.innerHTML = '<option value="">Selecione a Placa</option>';
 
     if (driverId) {
@@ -192,7 +173,6 @@ async function loadDriverVehicles() {
     }
 }
 
-//add
 async function addRecord() {
     const driverId = document.getElementById('driverId').value;
     const vehiclePlate = document.getElementById('vehiclePlate').value;
@@ -202,24 +182,21 @@ async function addRecord() {
     const remark = document.getElementById('remark').value;
 
     try {
-        // Busca o veículo pelo número da placa
         const vehicleResponse = await fetch(`http://localhost:8080/vehicles/plate/${vehiclePlate}`);
         if (!vehicleResponse.ok) {
             alert('Erro ao buscar veículo! Verifique a placa e tente novamente.');
             return;
         }
 
-        const vehicle = await vehicleResponse.json(); // Obtem o veículo
-
+        const vehicle = await vehicleResponse.json();
         const driverResponse = await fetch(`http://localhost:8080/drivers/${driverId}`);
         if (!driverResponse.ok) {
             alert('Erro ao buscar Motorista! Verifique a placa e tente novamente.');
             return;
         }
 
-        const driver = await driverResponse.json(); // Obtem o driver
+        const driver = await driverResponse.json();
 
-        // Monta o objeto conforme o formato esperado
         const newRecord = {
             recordType: recordType,
             date: formattedDate,
@@ -228,19 +205,16 @@ async function addRecord() {
             remark: remark,
         };
 
-        // Envia o registro final ao servidor
         const response = await fetch(API_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newRecord),
         });
 
         if (response.ok) {
             alert('Novo registro adicionado com sucesso!');
-            closeAddRecordPopup(); // Fechar o popup após sucesso
-            loadRecords(); // Recarregar a lista de registros
+            closeAddRecordPopup();
+            loadRecords();
         } else {
             alert('Erro ao adicionar o registro!');
         }
@@ -250,8 +224,6 @@ async function addRecord() {
     }
 }
 
-
-// Carregar os registros quando a página carregar
 window.onload = () => {
     loadRecords();
 };

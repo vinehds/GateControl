@@ -51,7 +51,11 @@ public class VehicleService {
     }
 
     public Vehicle insert(Vehicle vehicle) {
-        return vehicleRepository.save(vehicle);
+        if(isExists(vehicle.getPlate())){
+            throw new DataBaseException(vehicle.getPlate() + " already exists");
+        }else {
+            return vehicleRepository.save(vehicle);
+        }
     }
 
     public Vehicle update(Long id, Vehicle obj) {
@@ -87,6 +91,10 @@ public class VehicleService {
         entity.setModel(obj.getModel());
         entity.setColor(obj.getColor());
         entity.setOwner(obj.getOwner());
+    }
+
+    private boolean isExists(String plate) {
+        return vehicleRepository.findByPlate(plate) != null;
     }
 
 }
