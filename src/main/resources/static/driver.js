@@ -1,7 +1,7 @@
 const API_URL = `http://localhost:8080/drivers`;
 
 async function loadDrivers() {
-    const response = await fetch(`${API_URL}`);
+    const response = await fetch(API_URL);
     const drivers = await response.json();
 
     const list = document.getElementById('driver-table');
@@ -26,6 +26,9 @@ async function loadDrivers() {
         list.innerHTML = `<tr><td colspan="4">Nenhum Motorista encontrado no banco de dados!</td></tr>`;
     }
 }
+
+// Chamar a função assim que a página for carregada
+window.onload = loadDrivers;
 
 function openModal() {
     document.getElementById('modal').style.display = 'block';
@@ -112,10 +115,6 @@ async function saveDriver(id) {
     // Recarregar os motoristas
     loadDrivers();
 }
-
-
-// Chamar a função assim que a página for carregada
-window.onload = loadDrivers;
 
 
 async function deleteDriver(id) {

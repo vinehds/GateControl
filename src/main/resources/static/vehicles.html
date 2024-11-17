@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Portaria</title>
+    <link rel="stylesheet" href="entity-styles.css">
+    <!-- Link para Font Awesome (Adicione isso no seu <head>) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<nav class="top-nav">
+    <h1>Sistema de Portaria</h1>
+</nav>
+
+<div class="main-container">
+    <div class="sidebar">
+        <div class="divider-top"></div>
+        <ul>
+            <li>
+                <a href="index.html">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="drivers.html">
+                    <i class="fas fa-users"></i> Motoristas
+                </a>
+            </li>
+            <li>
+                <a href="vehicles.html">
+                    <i class="fas fa-car"></i> Veículos
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-cogs"></i> Configurações
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <main class="content">
+        <header>
+            <div class="head">
+                <h1>GERENCIAMENTO DE VEÍCULOS</h1>
+            </div>
+        </header>
+
+        <button id="btn-create">Novo Veículo</button>
+
+        <!-- Modal de Adição de Veículo -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="close-modal">&times;</span>
+                <h2>Adicionar Novo Veículo</h2>
+                <form id="vehicle-form">
+                    <label for="plate">Placa:</label>
+                    <input type="text" id="plate" name="plate" required />
+
+                    <label for="model">Modelo:</label>
+                    <input type="text" id="model" name="model" required />
+
+                    <label for="color">Cor:</label>
+                    <input type="text" id="color" name="color" required />
+
+                    <label for="owner">Motorista:</label>
+                    <select id="owner" name="owner" required>
+                        <!-- As opções de motoristas serão preenchidas dinamicamente -->
+                    </select>
+
+                    <button type="submit" >Salvar</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Confirmação de sucesso -->
+        <div id="success-message" class="success-message">
+            <p>Motorista adicionado com sucesso!</p>
+        </div>
+
+        <section class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Motorista</th>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Cor</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody id="vehicle-table">
+                <!-- Dados dos motoristas serão injetados via JS -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Portaria. Todos os direitos reservados.</p>
+    </footer>
+</div>
+
+<script src="vehicle.js"></script>
+</body>
+</html>

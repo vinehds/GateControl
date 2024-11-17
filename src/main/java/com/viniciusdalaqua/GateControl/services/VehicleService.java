@@ -1,6 +1,8 @@
 package com.viniciusdalaqua.GateControl.services;
 
+import com.viniciusdalaqua.GateControl.entities.Driver;
 import com.viniciusdalaqua.GateControl.entities.Vehicle;
+import com.viniciusdalaqua.GateControl.repositories.DriverRepository;
 import com.viniciusdalaqua.GateControl.repositories.VehicleRepository;
 import com.viniciusdalaqua.GateControl.services.exception.DataBaseException;
 import com.viniciusdalaqua.GateControl.services.exception.ResourceNotFoundException;
@@ -16,9 +18,11 @@ import java.util.Optional;
 public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
+    private final DriverRepository driverRepository;
 
-    public VehicleService(VehicleRepository vehicleRepository) {
+    public VehicleService(VehicleRepository vehicleRepository, DriverRepository driverRepository) {
         this.vehicleRepository = vehicleRepository;
+        this.driverRepository = driverRepository;
     }
 
     public List<Vehicle> findByDriverId(Long id) {
@@ -53,7 +57,15 @@ public class VehicleService {
     public Vehicle update(Long id, Vehicle obj) {
         try {
             Vehicle entity = vehicleRepository.getReferenceById(id);
-            updateData(entity, obj);
+
+            // Verificar se o motorista existe antes de atualizar o veículo
+            Driver driver = driverRepository.findById(obj.getOwner().getId())
+                    .orElseThrow(() -> new ResourceNotFoundException(obj.getOwner().getId()));
+
+            obj.setOwner(driver);  // Atualizar o motorista no objeto Vehicle
+
+            updateData(entity, obj);  // Atualiza os dados do veículo
+
             return vehicleRepository.save(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);

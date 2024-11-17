@@ -1,19 +1,28 @@
-/* Reset básico */
+/* Resetando estilos básicos */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-p {
-    padding: 30px;
-}
-
+/* Corpo e fonte */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #2c3e50;
+    line-height: 1.6;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+p{
+    padding: 30px;
+}
+.head h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #34495e; /* Linha de divisão no cabeçalho */
+    padding-bottom: 10px;
 }
 
 /* Barra de navegação superior */
@@ -23,7 +32,6 @@ body {
     padding: 15px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
-    max-height: 100px;
 }
 
 .top-nav h1 {
@@ -172,7 +180,7 @@ button:focus {
 
 /* Cabeçalhos da tabela */
 .styled-table thead tr {
-    background-color: #007BFF;
+    background-color: #2c3e50;
     color: #fff;
     font-weight: bold;
 }

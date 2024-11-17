@@ -200,6 +200,7 @@ button:focus {
 }
 /* Estilo para os campos, tanto habilitados quanto desabilitados */
 .editable {
+    all: unset;
     background-color: #fff;  /* Fundo branco */
     color: #333;             /* Texto escuro */
     border: 1px solid #ccc; /* Borda padrão */
@@ -237,6 +238,7 @@ button:focus {
     max-width: 500px;
     animation: slideIn 0.3s ease;
 }
+
 
 @keyframes fadeIn {
     from {
@@ -322,3 +324,40 @@ form button:hover {
         opacity: 1;
     }
 }
+
+/* Estilo do select */
+#owner {
+    width: 100%; /* Ocupa a largura completa */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    appearance: none; /* Remove o estilo padrão */
+    -webkit-appearance: none; /* Safari */
+    -moz-appearance: none; /* Firefox */
+}
+
+/* Ícone do dropdown */
+#owner:focus {
+    outline: none;
+    border-color: #007BFF; /* Azul ao focar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Brilho azul */
+}
+
+/* Adicionando uma seta customizada */
+#owner::after {
+    content: '\25BC'; /* Seta para baixo */
+    position: absolute;
+    right: 10px;
+    pointer-events: none; /* Evita interferência no clique */
+}
+
+/* Estilo das opções */
+#owner option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
