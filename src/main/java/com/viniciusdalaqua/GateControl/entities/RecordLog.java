@@ -32,20 +32,16 @@ public class RecordLog implements Serializable {
 
     private String remark;
 
-    @ManyToOne
-    @JoinColumn(name = "concierge_id")
-    private Concierge concierge;
-
     public RecordLog() {}
 
-    public RecordLog(Long id, RecordType recordType, LocalDateTime date, Vehicle vehicle, Driver driver, String remark, Concierge concierge) {
+    public RecordLog(Long id, RecordType recordType, LocalDateTime date, Vehicle vehicle, Driver driver, String remark) {
         this.id = id;
         setRecordType(recordType);
         this.date = date;
         this.vehicle = vehicle;
         this.driver = driver;
         this.remark = remark;
-        this.concierge = concierge;
+
     }
 
     public Long getId() {

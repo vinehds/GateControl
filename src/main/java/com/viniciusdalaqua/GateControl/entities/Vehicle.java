@@ -24,6 +24,7 @@ public class Vehicle implements Serializable {
 
     private String color;
 
+
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Driver owner;

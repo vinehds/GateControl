@@ -1,0 +1,324 @@
+/* Resetando estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo e fonte */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #2c3e50;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Barra de navegação superior */
+.top-nav {
+    background-color: #23323f;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+}
+
+.top-nav h1 {
+    font-size: 24px;
+}
+
+/* Container principal (sidebar e conteúdo) */
+.main-container {
+    display: flex;
+    flex: 1; /* Faz com que o conteúdo principal ocupe o restante do espaço */
+    padding: 0; /* Remover espaçamento entre a sidebar e o conteúdo */
+    flex-direction: column;
+}
+
+/* Sidebar (sem bordas e com altura completa) */
+.sidebar {
+    background-color: #2c3e50;
+    width: 220px;
+    height: 100vh; /* Altura total da tela */
+    padding-top: 20px;
+    position: fixed; /* Fixa a sidebar na tela */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1); /* Sombra para o lado da sidebar */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px; /* Borda arredondada */
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: #34495e;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Efeito de sombra no hover */
+}
+
+/* Conteúdo */
+.content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 240px; /* Espaço após a sidebar */
+    overflow-y: auto;
+    background-color: #fff; /* Fundo branco para o conteúdo */
+    border-radius: 8px; /* Borda arredondada */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para o conteúdo */
+}
+
+/* Cabeçalho do conteúdo */
+.head h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #34495e; /* Linha de divisão no cabeçalho */
+    padding-bottom: 10px;
+}
+
+/* Botão para novo motorista */
+#btn-create {
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 5px; /* Borda arredondada */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: background-color 0.3s ease;
+}
+
+#btn-create:hover {
+    background-color: #2ecc71;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+}
+
+/* Tabela - destacada com bordas e sombras */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para a tabela */
+    border: 1px solid #ddd; /* Borda suave */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #34495e;
+    color: white;
+}
+
+tr:hover {
+    background-color: #ecf0f1;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Borda arredondada */
+    transition: opacity 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Rodapé */
+.footer {
+    background-color: #23323f;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    margin-top: auto; /* Garante que o footer fique na parte inferior */
+}
+
+/* Divisórias para separar as seções */
+.divider {
+    margin: 30px 0;
+    border-top: 2px solid #ddd; /* Linha divisória */
+    opacity: 0.6;
+}
+
+/* Estilo dos cards (se necessário) */
+.card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 16px;
+    color: #7f8c8d;
+}
+.edt:disabled{
+    all: unset;
+}
+/* Estilo para os campos, tanto habilitados quanto desabilitados */
+.editable {
+    background-color: #fff;  /* Fundo branco */
+    color: #333;             /* Texto escuro */
+    border: 1px solid #ccc; /* Borda padrão */
+    padding: 8px 12px;
+    width: 100%;
+}
+
+/* Remover estilização padrão para campos desabilitados */
+.editable:disabled {
+    background-color: #fff; /* Fundo branco (sem esmaecer) */
+    color: #333;            /* Cor do texto normal (sem clarear) */
+    border: 1px solid #ccc; /* Manter a borda normal */
+    cursor: not-allowed;    /* Cursor de não permitido */
+}
+/* Estilo do Modal */
+.modal {
+    display: none; /* Modal oculto por padrão */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo translúcido */
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px; /* Arredondando os cantos */
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    float: right;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilo para o formulário dentro do modal */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 10px 0 5px;
+}
+
+form input {
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Arredondando os campos */
+}
+
+form button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px; /* Arredondando o botão */
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo da mensagem de sucesso */
+.success-message {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 5px;
+    animation: slideInMessage 0.5s ease;
+}
+
+@keyframes slideInMessage {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

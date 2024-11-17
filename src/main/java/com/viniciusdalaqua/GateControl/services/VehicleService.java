@@ -21,8 +21,24 @@ public class VehicleService {
         this.vehicleRepository = vehicleRepository;
     }
 
+    public List<Vehicle> findByDriverId(Long id) {
+        try {
+            return vehicleRepository.findByDriverId(id);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
+    }
+
+    public Vehicle findByPlate(String plate) {
+        return vehicleRepository.findByPlate(plate);
+    }
+
     public List<Vehicle> findAll() {
-        return vehicleRepository.findAll();
+        try {
+            return vehicleRepository.findAll();
+        } catch (Exception e) {
+            throw new DataBaseException(e.getMessage());
+        }
     }
 
     public Vehicle findById(Long id) {
