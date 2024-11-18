@@ -34,13 +34,27 @@
         <span class="close" id="close-modal">&times;</span>
         <h2>Adicionar Novo Motorista</h2>
         <form id="driver-form">
+
           <label for="name">Nome:</label>
-          <input type="text" id="name" name="name" required />
+
+          <input oninput="this.value = this.value.replace(/[^a-zA-ZáÁàÀâÂãÃéÉêÊíÍóÓôÔõÕúÚçÇ\s]/g, '')"
+                 type="text" id="name" name="name" required />
+
           <label for="cnh">CNH:</label>
-          <input type="text" id="cnh" name="cnh" required />
+
+          <input oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                 minlength="11" maxlength="11" type="text" id="cnh" name="cnh" required />
+
           <label for="phone">Telefone:</label>
-          <input type="text" id="phone" name="phone" required />
+
+          <input  placeholder="(XX) XXXXX-XXXX"
+                  maxlength="15"
+                  minlength="15"
+                  oninput="formatarTelefone(this)"
+                  type="text" id="phone" name="phone" required />
+
           <button type="submit">Salvar</button>
+
         </form>
       </div>
     </div>
@@ -70,5 +84,6 @@
 </div>
 
 <script src="driver.js"></script>
+
 </body>
 </html>

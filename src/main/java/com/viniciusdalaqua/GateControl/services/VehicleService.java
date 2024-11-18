@@ -51,7 +51,7 @@ public class VehicleService {
     }
 
     public Vehicle insert(Vehicle vehicle) {
-        if(isExists(vehicle.getPlate())){
+        if(isExists(vehicle.getPlate(), vehicle.getId())){
             throw new DataBaseException(vehicle.getPlate() + " already exists");
         }else {
             return vehicleRepository.save(vehicle);
@@ -61,7 +61,7 @@ public class VehicleService {
     public Vehicle update(Long id, Vehicle obj) {
         try {
 
-            if(isExists(obj.getPlate())){
+            if(isExists(obj.getPlate(), obj.getId())){
                 throw new DataBaseException(obj.getPlate() + " already exists");
             }
             Vehicle entity = vehicleRepository.getReferenceById(id);
@@ -97,8 +97,9 @@ public class VehicleService {
         entity.setOwner(obj.getOwner());
     }
 
-    private boolean isExists(String plate) {
-        return vehicleRepository.findByPlate(plate) != null;
+    private boolean isExists (String plate, Long id){
+        var vehicle = vehicleRepository.findByPlate(plate);
+        return vehicle != null && vehicle.getId().equals(id);
     }
 
 }

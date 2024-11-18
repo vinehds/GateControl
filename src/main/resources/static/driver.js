@@ -6,9 +6,25 @@ async function loadDrivers() {
     const list = document.getElementById('driver-table');
     list.innerHTML = drivers.length > 0 ? drivers.map(driver => `
         <tr>
-            <td><input class="editable" type="text" id="name-${driver.id}" value="${driver.name}" disabled /></td>
-            <td><input class="editable" type="text" id="cnh-${driver.id}" value="${driver.cnh}" disabled /></td>
-            <td><input class="editable" type="text" id="phone-${driver.id}" value="${driver.phone}" disabled /></td>
+            <td><input oninput="this.value = this.value.replace(/[^a-zA-ZáÁàÀâÂãÃéÉêÊíÍóÓôÔõÕúÚçÇ\\s]/g, '')" 
+                class="editable" 
+                type="text" 
+                id="name-${driver.id}" 
+                value="${driver.name}" 
+                disabled /></td>
+            <td><input oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                minlength="11"
+                maxlength="11" 
+                class="editable" 
+                type="text" 
+                id="cnh-${driver.id}" 
+                value="${driver.cnh}" 
+                disabled /></td>
+            <td><input placeholder="(XX) XXXXX-XXXX"
+                maxlength="15"
+                minlength="15"
+                oninput="formatarTelefone(this)"
+                class="editable" type="text" id="phone-${driver.id}" value="${driver.phone}" disabled /></td>
             <td>
                 <button onclick="editDriver(${driver.id})">Editar</button>
                 <button onclick="saveDriver(${driver.id})" style="display:none;">Salvar</button>
@@ -47,16 +63,14 @@ document.getElementById('driver-form').addEventListener('submit', async function
             body: JSON.stringify(newDriver)
         });
 
-        if (response.ok) {
+        if (response.ok || response.status === 201) {
             document.getElementById('success-message').style.display = 'block';
             setTimeout(() => document.getElementById('success-message').style.display = 'none', 3000);
             closeModal();
-            loadDrivers();
-        } else {
-            throw new Error('Falha ao adicionar motorista.');
+            await loadDrivers();
         }
     } catch (error) {
-        alert('Erro ao adicionar motorista: ' + error.message);
+        alert('Erro ao adicionar motorista: CNH já cadastrada no sistema');
     }
 });
 
@@ -76,13 +90,20 @@ async function saveDriver(id) {
         phone: document.getElementById(`phone-${id}`).value
     };
 
-    await fetch(`${API_URL}/${id}`, {
+    const  resp = fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(driverData)
     });
 
-    loadDrivers();
+    if((await resp).ok){
+        alert('Motorista atualizado!')
+    }
+    else{
+        alert('Motorista com a CNH inserida já registrada no sistema!')
+    }
+
+    await loadDrivers();
 }
 
 async function deleteDriver(id) {
@@ -91,7 +112,7 @@ async function deleteDriver(id) {
 
         if (response.ok) {
             alert('Motorista deletado com sucesso!');
-            loadDrivers();
+            await loadDrivers();
         } else {
             alert(`Este Motorista não pode ser excluído porque está associado a outros registros no sistema.`);
         }
@@ -99,4 +120,10 @@ async function deleteDriver(id) {
         console.error('Erro:', error);
         alert('Erro ao conectar com o servidor!');
     }
+}
+function formatarTelefone(input) {
+    let valor = input.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+    valor = valor.replace(/^(\d{2})(\d)/, '($1) $2'); // Adiciona o parênteses no DDD
+    valor = valor.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o hífen no número
+    input.value = valor.substring(0, 15); // Limita a 15 caracteres
 }
