@@ -97,17 +97,6 @@ A aplicação *GateControl* permite gerenciar os registros de entrada e saída d
 
 ---
 
-## Estrutura de Pastas
-
-Abaixo está a estrutura completa de pastas do projeto *GateControl*:
-
-
-GateControl/ ├── .mvn/ # Arquivos relacionados ao Maven Wrapper │ └── ... # (Detalhes internos do Maven Wrapper) ├── src/ │ ├── main/ │ │ ├── java/ │ │ │ └── com/ │ │ │ └── viniciusdalaqua/ │ │ │ └── GateControl/ │ │ │ ├── config/ │ │ │ │ └── TestConfig.java # Configurações de teste │ │ │ ├── entities/ # Entidades do sistema │ │ │ │ ├── Driver.java # Representa motoristas │ │ │ │ ├── RecordLog.java # Registros de entrada/saída │ │ │ │ └── Vehicle.java # Representa veículos │ │ │ ├── enums/ # Enumerações │ │ │ │ └── RecordType.java # Tipos de registros (entrada/saída) │ │ │ ├── repositories/ # Repositórios para o banco │ │ │ │ ├── DriverRepository.java # Operações com motoristas │ │ │ │ ├── RecordLogRepository.java # Operações com registros │ │ │ │ └── VehicleRepository.java # Operações com veículos │ │ │ ├── exception/ # Tratamento de erros │ │ │ │ ├── ResourceExceptionHandler.java # Handler global de erros │ │ │ │ └── StandardError.java # Modelo de resposta para erros │ │ │ ├── services/ # Lógica de negócios │ │ │ │ ├── DriverService.java # Serviço de motoristas │ │ │ │ ├── RecordLogService.java # Serviço de registros │ │ │ │ └── VehicleService.java # Serviço de veículos │ │ │ └── GateControlApplication.java # Classe principal do Spring Boot │ │ ├── resources/ │ │ │ ├── static/ # Arquivos estáticos │ │ │ │ ├── assets/ │ │ │ │ │ ├── driver.js # JS para página de motoristas │ │ │ │ │ ├── vehicle.js # JS para página de veículos │ │ │ │ │ └── ... # Outros assets │ │ │ │ ├── scripts.js # Scripts genéricos │ │ │ │ ├── style.css # CSS principal │ │ │ │ └── entity-styles.css # Estilos específicos para entidades │ │ │ ├── templates/ # Templates HTML (ex.: Thymeleaf) │ │ │ ├── application-dev.properties # Configuração para desenvolvimento │ │ │ └── application.properties # Configuração geral do Spring Boot │ │ └── test/ │ │ └── java/com/viniciusdalaqua/GateControl/ │ │ ├── controller/ # Testes para os controladores REST │ │ ├── service/ # Testes para os serviços │ │ └── GateControlApplicationTests.java # Testes gerais da aplicação ├── .gitignore # Arquivos/recursos a serem ignorados pelo Git ├── .gitattributes # Configuração de atributos do Git ├── mvnw # Script do Maven Wrapper (Linux/Mac) ├── mvnw.cmd # Script do Maven Wrapper (Windows) ├── pom.xml # Configuração do Maven └── README.md # Documentação do projeto
-
-
-
----
-
 ## Licença
 
 Distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais informações.
