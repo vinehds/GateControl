@@ -21,7 +21,7 @@ Este projeto implementa um sistema de gerenciamento de registros de veículos e 
 - *Java 17*
 - *Spring Boot* para o backend
 - *MySQL* como banco de dados
-- *HTML, **CSS* e *JavaScript* para a interface de usuário
+- *HTML*, *CSS* e *JavaScript* para a interface de usuário
 - *Maven* como ferramenta de gerenciamento de dependências
 
 ## Instalação
@@ -47,12 +47,19 @@ Dentro deste arquivo, localize ou adicione as seguintes configurações:
 
 properties
 # Configuração do banco de dados
+
 spring.datasource.url=jdbc:mysql://localhost:3306/supportcrud -> URL DO BANCO
+
 spring.datasource.username=SEU_USUARIO   -> seu usuario do mySQL
+
 spring.datasource.password=SUA_SENHA     -> sua senha do mySQL
+
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+
 spring.jpa.hibernate.ddl-auto=update
+
 spring.jpa.show-sql=true
+
 spring.jpa.properties.hibernate.format_sql=true
 
 
