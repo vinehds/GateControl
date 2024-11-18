@@ -160,9 +160,9 @@ document.getElementById('vehicle-form').addEventListener('submit', async functio
     e.preventDefault();
 
     const vehicleData = {
-        owner: { id: document.getElementById('plate').value },
-        plate: document.getElementById('model').value,
-        model: document.getElementById('owner').value,
+        owner: { id: document.getElementById('owner').value} ,
+        plate: document.getElementById('plate').value,
+        model: document.getElementById('model').value,
         color: document.getElementById('color').value
     };
 
@@ -173,15 +173,11 @@ document.getElementById('vehicle-form').addEventListener('submit', async functio
             body: JSON.stringify(vehicleData)
         });
 
-        console.log('Status:', response.status);
-        console.log('Resposta completa:', await response.text());
-
-
         if (response.ok || response.status === 201) {
             document.getElementById('success-message').style.display = 'block';
             setTimeout(() => document.getElementById('success-message').style.display = 'none', 3000);
             closeModal();
-            await loadDrivers();
+            await loadVehicles();
         }
         else {
             alert('Erro: veículo já cadastrado!')
