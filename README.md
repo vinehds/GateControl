@@ -8,8 +8,6 @@ O *GateControl* é um sistema de gerenciamento de registros de entrada e saída 
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Uso](#uso)
-- [Estrutura de Pastas](#estrutura-de-pastas)
-- [Dados de Exemplo](#dados-de-exemplo)
 - [Licença](#licença)
 
 ## Descrição
