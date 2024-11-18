@@ -103,60 +103,55 @@ Abaixo está a estrutura completa de pastas do projeto *GateControl*:
 
 
 GateControl/
-│
-├── .mvn/                               # Arquivos relacionados ao Maven Wrapper
+├── .mvn/                             # Arquivos relacionados ao Maven Wrapper
+│   └── ...                           # (Detalhes internos do Maven Wrapper)
 ├── src/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com/
 │   │   │       └── viniciusdalaqua/
 │   │   │           └── GateControl/
-│   │   │               ├── config/                      
-│   │   │               │   └── TestConfig.java          # Configurações de teste
-│   │   │               ├── entities/                    # Entidades do sistema (Driver, Vehicle, RecordLog)
-│   │   │               │   ├── Driver.java
-│   │   │               │   ├── RecordLog.java
-│   │   │               │   └── Vehicle.java
-│   │   │               ├── enums/                        # Enumerações, como RecordType
-│   │   │               │   └── RecordType.java
-│   │   │               ├── repositories/                # Repositórios para interação com o banco
-│   │   │               │   ├── DriverRepository.java
-│   │   │               │   ├── RecordLogRepository.java
-│   │   │               │   └── VehicleRepository.java
-│   │   │               ├── resources/                   # Recursos de configuração e fontes estáticas
-│   │   │               ├── exception/                   # Exceções e tratamento de erros
-│   │   │               │   ├── ResourceExceptionHandler.java
-│   │   │               │   └── StandardError.java
-│   │   │               ├── services/                    # Serviços que implementam a lógica de negócios
-│   │   │               │   ├── DriverService.java
-│   │   │               │   ├── RecordLogService.java
-│   │   │               │   └── VehicleService.java
-│   │   │               ├── GateControlApplication.java   # Classe principal para inicialização do Spring Boot
+│   │   │               ├── config/
+│   │   │               │   └── TestConfig.java         # Configurações de teste
+│   │   │               ├── entities/                  # Entidades do sistema
+│   │   │               │   ├── Driver.java            # Representa motoristas
+│   │   │               │   ├── RecordLog.java         # Registros de entrada/saída
+│   │   │               │   └── Vehicle.java           # Representa veículos
+│   │   │               ├── enums/                     # Enumerações
+│   │   │               │   └── RecordType.java        # Tipos de registros (entrada/saída)
+│   │   │               ├── repositories/              # Repositórios para o banco
+│   │   │               │   ├── DriverRepository.java  # Operações com motoristas
+│   │   │               │   ├── RecordLogRepository.java # Operações com registros
+│   │   │               │   └── VehicleRepository.java # Operações com veículos
+│   │   │               ├── resources/                 # Recursos de configuração
+│   │   │               ├── exception/                 # Tratamento de erros
+│   │   │               │   ├── ResourceExceptionHandler.java # Handler global de erros
+│   │   │               │   └── StandardError.java     # Modelo de resposta para erros
+│   │   │               ├── services/                  # Lógica de negócios
+│   │   │               │   ├── DriverService.java     # Serviço de motoristas
+│   │   │               │   ├── RecordLogService.java  # Serviço de registros
+│   │   │               │   └── VehicleService.java    # Serviço de veículos
+│   │   │               └── GateControlApplication.java # Classe principal do Spring Boot
 │   │   ├── resources/
-│   │   │   ├── static/                      # Arquivos estáticos servidos pelo backend (CSS, JS, imagens)
+│   │   │   ├── static/                 
 │   │   │   │   ├── assets/
-│   │   │   │   │   ├── driver.js
-│   │   │   │   │   ├── vehicle.js
-│   │   │   │   │   └── ...
-│   │   │   │   ├── scripts.js
-│   │   │   │   ├── style.css
-│   │   │   │   └── entity-styles.css
-│   │   │   ├── templates/                   # Arquivos HTML dinâmicos (se aplicável, como com Thymeleaf)
-│   │   │   ├── application-dev.properties    # Configuração para ambiente de desenvolvimento
-│   │   │   └── application.properties        # Configuração geral do Spring Boot
-│   │
-├── test/
-│   └── java/com/viniciusdalaqua/GateControl/  # Testes unitários e de integração
-│       ├── controller/                        # Testes para os controladores (endpoints REST)
-│       ├── service/                           # Testes para os serviços de lógica de negócios
-│       └── GateControlApplicationTests.java   # Testes gerais da aplicação
-│
-├── .gitignore                                # Arquivo para ignorar arquivos temporários no Git
-├── .gitattributes                            # Arquivo para configurar atributos do Git
-├── mvnw                                      # Script do Maven Wrapper (para rodar Maven sem instalação prévia)
-├── mvnw.cmd                                  # Script para Windows do Maven Wrapper
-├── pom.xml                                   # Arquivo de configuração do Maven
-└── README.md                                 # Este arquivo de documentação
+│   │   │   │   │   ├── driver.js     
+│   │   │   │   │   ├── vehicle.js   
+│   │   │   │   │   └── ...             
+│   │   │   │   ├── scripts.js       
+│   │   │   │   ├── style.css           
+│   │   │   │   └── entity-styles.css    
+│   │   │   ├── templates/              
+│   │   │   ├── application-dev.properties # Configuração para desenvolvimento
+│   │   │   └── application.properties   # Configuração geral do Spring Boot
+│   │   └── test/
+│   │       └── java/com/viniciusdalaqua/GateControl/
+│   │           └── GateControlApplicationTests.java # Testes gerais da aplicação
+├── .gitignore                          # Arquivos/recursos a serem ignorados pelo Git
+├── .gitattributes                      # Configuração de atributos do Git
+├── pom.xml                             # Configuração do Maven
+└── README.md                           # Documentação do projeto
+
 
 
 ---
