@@ -45,7 +45,6 @@ O projeto utiliza o *MySQL* como banco de dados. A configuração da conexão po
 
 Dentro deste arquivo, localize ou adicione as seguintes configurações:
 
-properties
 # Configuração do banco de dados
 
 spring.datasource.url=jdbc:mysql://localhost:3306/supportcrud -> URL DO BANCO
