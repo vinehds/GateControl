@@ -159,38 +159,35 @@ async function loadDrivers() {
 document.getElementById('vehicle-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const plate = document.getElementById('plate').value;
-    const model = document.getElementById('model').value;
-    const color = document.getElementById('color').value;
-    const ownerId = document.getElementById('owner').value;
-
     const vehicleData = {
-        owner: { id: ownerId },
-        plate: plate,
-        model: model,
-        color: color
+        owner: { id: document.getElementById('plate').value },
+        plate: document.getElementById('model').value,
+        model: document.getElementById('owner').value,
+        color: document.getElementById('color').value
     };
 
     try {
         const response = await fetch(API_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(vehicleData)
         });
 
-        if (response.status === 201) {
-            document.getElementById('success-message').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('success-message').style.display = 'none';
-            }, 3000);
+        console.log('Status:', response.status);
+        console.log('Resposta completa:', await response.text());
 
-            await loadVehicles();
+
+        if (response.ok || response.status === 201) {
+            document.getElementById('success-message').style.display = 'block';
+            setTimeout(() => document.getElementById('success-message').style.display = 'none', 3000);
             closeModal();
+            await loadDrivers();
         }
-    } catch (error) {
-        alert('Erro ao adicionar veículo: Placa já registrada no sistema');
+        else {
+            alert('Erro: veículo já cadastrado!')
+        }
+    } catch (e) {
+        alert('Erro ' + e);
     }
 });
 

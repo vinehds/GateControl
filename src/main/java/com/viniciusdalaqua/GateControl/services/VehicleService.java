@@ -12,6 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -61,7 +62,7 @@ public class VehicleService {
     public Vehicle update(Long id, Vehicle obj) {
         try {
 
-            if(isExists(obj.getPlate(), obj.getId())){
+            if(isExists(obj.getPlate(), id)){
                 throw new DataBaseException(obj.getPlate() + " already exists");
             }
             Vehicle entity = vehicleRepository.getReferenceById(id);
@@ -98,8 +99,16 @@ public class VehicleService {
     }
 
     private boolean isExists (String plate, Long id){
-        var vehicle = vehicleRepository.findByPlate(plate);
-        return vehicle != null && vehicle.getId().equals(id);
+        Vehicle vehicle = vehicleRepository.findByPlate(plate);
+
+        if (vehicle != null) {
+            if (!vehicle.getId().equals(id)) {
+                return true;
+            }
+            else { return false; }
+        }
+        else {return false;}
+
     }
 
 }

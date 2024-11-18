@@ -69,8 +69,11 @@ document.getElementById('driver-form').addEventListener('submit', async function
             closeModal();
             await loadDrivers();
         }
+        else {
+            alert('Erro: Motorista com a CNH inserida já cadastrado!')
+        }
     } catch (error) {
-        alert('Erro ao adicionar motorista: CNH já cadastrada no sistema');
+        alert('Erro ' + error);
     }
 });
 

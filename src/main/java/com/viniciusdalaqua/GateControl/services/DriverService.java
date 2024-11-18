@@ -40,12 +40,12 @@ public class DriverService {
     }
 
     public Driver update(Long id, Driver obj) {
-
-        if(isExists(obj.getCnh(), obj.getId())){
-            throw new DataBaseException(obj.getCnh() + " already exists");
-        }
-
         try {
+
+            if(isExists(obj.getCnh(), id)){
+                throw new DataBaseException(obj.getCnh() + " already exists");
+            }
+
             Driver entity = driverRepository.getReferenceById(id);
             updateData(entity, obj);
             return driverRepository.save(entity);
@@ -73,7 +73,11 @@ public class DriverService {
     private boolean isExists (String cnh, Long id){
         var driver = driverRepository.findByCnh(cnh);
 
-        return driver != null && driver.getId().equals(id);
+        if (driver != null) {
+            return !driver.getId().equals(id);
+        }
+        else {return false;}
+
     }
 
 }
