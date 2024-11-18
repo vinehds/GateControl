@@ -60,6 +60,10 @@ public class VehicleService {
 
     public Vehicle update(Long id, Vehicle obj) {
         try {
+
+            if(isExists(obj.getPlate())){
+                throw new DataBaseException(obj.getPlate() + " already exists");
+            }
             Vehicle entity = vehicleRepository.getReferenceById(id);
 
             // Verificar se o motorista existe antes de atualizar o veículo

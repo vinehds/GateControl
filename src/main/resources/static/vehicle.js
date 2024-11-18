@@ -13,19 +13,28 @@ async function loadVehicles() {
     if (vehicles.length > 0) {
         vehicles.forEach(vehicle => {
             const driverOptions = drivers.map(driver => {
-                return `<option value="${driver.id}" ${driver.id === vehicle.owner.id ? 'selected' : ''}>${driver.name}</option>`;
+                return `<option value="${driver.id}" ${driver.id === vehicle.owner.id ? 'selected' : ''}>
+                ${driver.name}</option>`;
             }).join('');
 
             list.innerHTML += `
             <tr id="vehicle-row-${vehicle.id}">
                 <td>
-                    <select class="editable" id="owner-${vehicle.id}" disabled>
+                    <select class="editable" id="owner-${vehicle.id}" disabled required>
                         ${driverOptions}
                     </select>
                 </td>
-                <td><input class="editable" type="text" id="plate-${vehicle.id}" value="${vehicle.plate}" disabled /></td>
-                <td><input class="editable" type="text" id="model-${vehicle.id}" value="${vehicle.model}" disabled /></td>
-                <td><input class="editable" type="text" id="color-${vehicle.id}" value="${vehicle.color}" disabled /></td>
+                <td>
+                    <input class="editable" maxlength="7" placeholder="Ex.: ABC1234 ou ABC1D23" 
+                        pattern="^[A-Za-z]{3}\\d{4}$|^[A-Za-z]{3}\\d[A-Za-z]\\d{2}$" type="text" id="plate-${vehicle.id}" 
+                        value="${vehicle.plate}"  disabled />
+                </td>
+                <td>
+                    <input class="editable" type="text" id="model-${vehicle.id}" value="${vehicle.model}" disabled />
+                </td>
+                <td>
+                    <input class="editable" type="text" id="color-${vehicle.id}" value="${vehicle.color}" disabled />
+                </td>
                 <td>
                     <button onclick="editVehicle(${vehicle.id})">Editar</button>
                     <button onclick="saveVehicle(${vehicle.id})" style="display:none;">Salvar</button>
@@ -67,13 +76,21 @@ async function saveVehicle(id) {
         color: color
     };
 
-    await fetch(`${API_URL}/${id}`, {
+
+    const resp = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(vehicleData)
     });
+
+    if (resp.ok){
+        alert(`Veículo atualizado!`)
+    }
+    else {
+        alert(`Error : Placa já cadastrada no sistema!`)
+    }
 
     updateVehicleRow(id, vehicleData);
 
@@ -86,6 +103,7 @@ async function saveVehicle(id) {
     saveButton.style.display = 'none';
     const editButton = document.querySelector(`#vehicle-table tr td button[onclick="editVehicle(${id})"]`);
     editButton.style.display = 'inline-block';
+    await loadVehicles()
 }
 
 function updateVehicleRow(id, vehicleData) {
@@ -104,9 +122,9 @@ async function deleteVehicle(id) {
 
         if (response.ok) {
             alert('Veículo deletado com sucesso!');
-            loadVehicles();
+            await loadVehicles();
         } else {
-            alert('Erro ao deletar o Veículo!');
+            alert(`Este veículo não pode ser excluído porque está associado a outros registros no sistema.`);
         }
     } catch (error) {
         console.error('Erro:', error);
@@ -114,9 +132,9 @@ async function deleteVehicle(id) {
     }
 }
 
-function openModal() {
+async function openModal() {
     document.getElementById('modal').style.display = 'block';
-    loadDrivers();
+    await loadDrivers();
 }
 
 function closeModal() {
@@ -168,13 +186,11 @@ document.getElementById('vehicle-form').addEventListener('submit', async functio
                 document.getElementById('success-message').style.display = 'none';
             }, 3000);
 
-            loadDrivers();
+            await loadVehicles();
             closeModal();
-        } else {
-            throw new Error('Falha ao adicionar veículo.');
         }
     } catch (error) {
-        alert('Erro ao adicionar veículo: ' + error.message);
+        alert('Erro ao adicionar veículo: Placa já registrada no sistema');
     }
 });
 

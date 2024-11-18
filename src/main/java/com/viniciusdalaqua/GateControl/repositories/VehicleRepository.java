@@ -15,6 +15,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
 
 
-    @Query("SELECT v FROM Vehicle v WHERE v.plate = :plate")
+    @Query("SELECT v FROM Vehicle v WHERE LOWER(v.plate) = LOWER(:plate)")
     Vehicle findByPlate(@Param("plate") String plate);
+
 }

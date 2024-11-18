@@ -93,7 +93,7 @@ async function deleteDriver(id) {
             alert('Motorista deletado com sucesso!');
             loadDrivers();
         } else {
-            alert('Erro ao deletar o motorista!');
+            alert(`Este Motorista não pode ser excluído porque está associado a outros registros no sistema.`);
         }
     } catch (error) {
         console.error('Erro:', error);

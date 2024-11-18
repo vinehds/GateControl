@@ -18,7 +18,7 @@
         <ul>
             <li>
                 <a href="index.html">
-                    <i class="fas fa-home"></i> Dashboard
+                    <i class="fas fa-home"></i> Registros
                 </a>
             </li>
             <li>
@@ -49,7 +49,9 @@
                 <h2>Adicionar Novo Veículo</h2>
                 <form id="vehicle-form">
                     <label for="plate">Placa:</label>
-                    <input type="text" id="plate" name="plate" required />
+                    <input maxlength="7" placeholder="Ex.: ABC1234 ou ABC1D23"
+                           pattern="^[A-Za-z]{3}\d{4}$|^[A-Za-z]{3}\d[A-Za-z]\d{2}$"
+                           type="text" id="plate" name="plate" required />
 
                     <label for="model">Modelo:</label>
                     <input type="text" id="model" name="model" required />
