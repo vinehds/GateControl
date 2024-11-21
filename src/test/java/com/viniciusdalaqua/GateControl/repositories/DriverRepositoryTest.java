@@ -26,7 +26,7 @@ class DriverRepositoryTest {
     @Test
     @DisplayName("Should get Driver with the cpf from DB")
     void findByCnhSuccess() {
-        String cnh = "99999999999";
+        String cnh = "999999999";
         Driver driverTest = new Driver(null, "Driver Name", cnh, "14999999999");
         this.createDriver(driverTest);
 
@@ -38,7 +38,7 @@ class DriverRepositoryTest {
     @Test
     @DisplayName("It shouldn't get Driver with the DB cpf when the user doesn't exist")
     void findByCnhError() {
-        String cnh = "99999999999";
+        String cnh = "999999999";
 
         Optional<Driver> result = this.driverRepository.findByCnh(cnh);
 

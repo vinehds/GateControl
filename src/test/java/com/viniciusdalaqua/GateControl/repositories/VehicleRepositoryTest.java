@@ -30,8 +30,8 @@ class VehicleRepositoryTest {
     @Test
     @DisplayName("Should get Drivers with the owner id from DB")
     void findByDriverIdSuccess() {
-        var vehicle = new Vehicle(null, "ABED904", "Car test", "red",
-                new Driver(null, "Driver Name", "99999999999", "14999999999"));
+        var vehicle = new Vehicle(null, "ABE5904", "Car test", "red",
+                new Driver(null, "Driver Name", "999999999", "14999999999"));
 
         this.createVehicle(vehicle);
 
@@ -56,7 +56,7 @@ class VehicleRepositoryTest {
     void findByPlateSuccess() {
         String plate = "ABED905";
         var vehicle = new Vehicle(null, plate, "Car test", "red",
-                new Driver(null, "Driver Name", "99999999999", "14999999999"));
+                new Driver(null, "Driver Name", "999999999", "14999999999"));
 
         this.createVehicle(vehicle);
 
