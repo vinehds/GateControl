@@ -7,7 +7,6 @@ import com.viniciusdalaqua.GateControl.services.exception.ResourceNotFoundExcept
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

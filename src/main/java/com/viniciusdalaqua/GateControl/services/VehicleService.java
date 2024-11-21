@@ -6,6 +6,7 @@ import com.viniciusdalaqua.GateControl.repositories.DriverRepository;
 import com.viniciusdalaqua.GateControl.repositories.VehicleRepository;
 import com.viniciusdalaqua.GateControl.services.exception.DataBaseException;
 import com.viniciusdalaqua.GateControl.services.exception.ResourceNotFoundException;
+import com.viniciusdalaqua.GateControl.services.exception.VehicleNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -35,7 +36,8 @@ public class VehicleService {
     }
 
     public Vehicle findByPlate(String plate) {
-        return vehicleRepository.findByPlate(plate);
+        Optional<Vehicle> vehicle = vehicleRepository.findByPlate(plate);
+        return vehicle.orElseThrow(() -> new VehicleNotFoundException(plate));
     }
 
     public List<Vehicle> findAll() {
@@ -99,16 +101,9 @@ public class VehicleService {
     }
 
     private boolean isExists (String plate, Long id){
-        Vehicle vehicle = vehicleRepository.findByPlate(plate);
+        var vehicle = vehicleRepository.findByPlate(plate);
 
-        if (vehicle != null) {
-            if (!vehicle.getId().equals(id)) {
-                return true;
-            }
-            else { return false; }
-        }
-        else {return false;}
-
+        return vehicle.filter(value -> !value.getId().equals(id)).isPresent();
     }
 
 }

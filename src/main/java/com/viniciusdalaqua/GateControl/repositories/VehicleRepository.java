@@ -7,15 +7,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
+
     @Query("SELECT v FROM Vehicle v WHERE v.owner.id = :ownerId")
     List<Vehicle> findByDriverId(@Param("ownerId") Long ownerId);
 
-
-
     @Query("SELECT v FROM Vehicle v WHERE LOWER(v.plate) = LOWER(:plate)")
-    Vehicle findByPlate(@Param("plate") String plate);
+    Optional<Vehicle> findByPlate(@Param("plate") String plate);
 
 }

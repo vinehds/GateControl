@@ -35,7 +35,6 @@ public class DriverService {
         if(isExists(driver.getCnh(), driver.getId())){
             throw new DataBaseException(driver.getCnh() + " already exists");
         }
-
         return driverRepository.save(driver);
     }
 
@@ -73,11 +72,7 @@ public class DriverService {
     private boolean isExists (String cnh, Long id){
         var driver = driverRepository.findByCnh(cnh);
 
-        if (driver != null) {
-            return !driver.getId().equals(id);
-        }
-        else {return false;}
-
+        return driver.filter(value -> !value.getId().equals(id)).isPresent();
     }
 
 }
